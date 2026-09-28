@@ -1,5 +1,7 @@
 """functions for transforming to results"""
 import json
+import os
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -50,6 +52,17 @@ def write_stats_by_year(race_stats: DataFrame, output_dir: str) -> None:
         with open(f"{output_dir}/stats_{year}.json", "w", encoding="utf-8") as f:
             json.dump(races, f, indent=4, ensure_ascii=False)
 
+def create_spark_session(app_name: str) -> SparkSession:
+    # On Windows, Spark otherwise looks for "python3", which is the Microsoft Store stub
+    os.environ.setdefault("PYSPARK_PYTHON", sys.executable)
+    return (
+        SparkSession.builder
+        .master("local[*]")
+        .appName(app_name)
+        # The source data is tiny; the default 200 shuffle partitions just adds overhead
+        .config("spark.sql.shuffle.partitions", "1")
+        .getOrCreate()
+    )
 
 # ## Objective
 # - Develop a data pipeline that produces JSON files which have the same structure as below.

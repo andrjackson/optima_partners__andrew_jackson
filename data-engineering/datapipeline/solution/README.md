@@ -12,13 +12,18 @@ From the repo root:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+# run one of the below based on os
+source .venv/bin/activate        # Mac/Linux
+.venv\Scripts\Activate.ps1       # Windows PowerShell
 pip install -r solution/requirements.txt
+# run the actual pipeline
 python solution/main.py
 ```
 
 ## How it works
 All the logic is in `pipeline.py`. `main.py` just wires it together.
+
+Tests run separately but could be run automatically via github actions in a proper CI/CD setup
 
 ## Running the tests
 ```bash
