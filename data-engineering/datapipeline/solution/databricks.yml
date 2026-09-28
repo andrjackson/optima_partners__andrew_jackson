@@ -1,0 +1,42 @@
+# Databricks Asset Bundle for the F1 race stats pipeline.
+# Deploys main.py as a job
+# changes sources/outputs to volume paths
+
+bundle:
+  name: f1_race_stats
+
+variables:
+  volume_path:
+    description: source-data/ and results/
+    default: /Volumes/main/f1_races/races_data
+
+resources:
+  jobs:
+    f1_race_stats:
+      name: f1-race-stats
+      # Run whenever new source files land in the volume
+      trigger:
+        file_arrival:
+          url: ${var.volume_path}/source-data/
+
+      tasks:
+        - task_key: build_stats
+          environment_key: default
+          spark_python_task:
+            python_file: main.py
+            parameters:
+              - ${var.volume_path}/source-data
+              - ${var.volume_path}/results
+# used for serverless compute - to restrict serverless can name compute specifics here within bounds
+# of a compute policy
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "5"
+
+targets:
+  dev:
+    mode: development
+    default: true
+  prod:
+    mode: production
