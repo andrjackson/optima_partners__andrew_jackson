@@ -33,17 +33,17 @@ python -m pytest
 
 ## Challenges completed:
 ### Objective
-[x] Develop a data pipeline that produces JSON files which have the same structure as below.
-[x] Each element in the list should be for one race from the `races.csv` file.
-[x] You should produce one file per year available in the source data.
-[x] Your JSON files should be called `stats_{year}.json`, one for each year and be placed in the `results` folder. 
-[x] If the time is not available in `races.csv`, use `00:00:00`
-[x] In `results.csv` the winning driver is determined as the one who finished in position 1 for that race
-[x] If the JSON value for a key is always a number, represent it as such rather than a string
+- [x] Develop a data pipeline that produces JSON files which have the same structure as below.
+- [x] Each element in the list should be for one race from the `races.csv` file.
+- [x] You should produce one file per year available in the source data.
+- [x] Your JSON files should be called `stats_{year}.json`, one for each year and be placed in the `results` folder. 
+- [x] If the time is not available in `races.csv`, use `00:00:00`
+- [x] In `results.csv` the winning driver is determined as the one who finished in position 1 for that race
+- [x] If the JSON value for a key is always a number, represent it as such rather than a string
 
 ### Stretch goals
-[x] Include unit tests for all functions. NOTE: I didnt add unit tests for all them, only some examples
-[x] While this assignmment does not require you to deploy to a cloud provider, the solution would eventually require this. Add some notes to your documentation about the tools you might use to deploy this pipeline to a cloud provider of your choice and what kind of considerations you'd need to make in doing so. NOTE: I added a Databricks DAB deployment to demonstrate the scenario where this is deployed to the cloud, cloud agnostic through DBX
+- [x] Include unit tests for all functions. NOTE: I didnt add unit tests for all them, only some examples
+- [x] While this assignmment does not require you to deploy to a cloud provider, the solution would eventually require this. Add some notes to your documentation about the tools you might use to deploy this pipeline to a cloud provider of your choice and what kind of considerations you'd need to make in doing so. NOTE: I added a Databricks DAB deployment to demonstrate the scenario where this is deployed to the cloud, cloud agnostic through DBX
 
 ## Databricks Deploy
 databricks.yml adds an option for deploying this as a Daatbricks Asset Bundle, including a job and volumes
