@@ -30,6 +30,20 @@ Tests run separately but could be run automatically via github actions in a prop
 cd solution
 python -m pytest
 ```
+## Cloud Options
+The databricks.yml file adds the functionality here to deploy this as a databricks asset bundle. Before doing so, some considerations would need to be made and cloud hosting established. I'll discuss launching this on an AWS/Databricks platform.
+### Tools
+- **Databricks Asset Bundles**: define the job, trigger, compute
+- **Unity Catalog volumes**: hold the source CSVs and output JSON
+- **S3 + Terraform**: the volume would sit on an S3 external location. The
+  bucket, IAM role, storage credential and external location would be
+  managed in Terraform as infrastructure
+- **IAM Roles**: designed in conjunction with Databricks Permissions and Groups to define access to cloud data
+### Considerations
+- Prod and Dev data should sit in separate catalogs, inaccessible across environments
+- All deployments should be via DABs for consistency - no deploying to prod without first testing in dev
+- job failures should go to email and slack/teams, or to a monitoring system like Splunk if essential
+- Permissions for data should be set at the minimum level in IAM and Databricks
 
 ## Challenges completed:
 ### Objective
